@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - VillaShield</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+        }
+        .admin-sidebar {
+            width: 250px;
+            background-color: #222;
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .admin-sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .admin-sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 6px;
+        }
+        .admin-sidebar a:hover {
+            background-color: #444;
+        }
+        .admin-content {
+            flex: 1;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-sidebar">
+        <h2>📋 Admin Panel</h2>
+        <a href="/admin">🏠 Dashboard</a>
+        <a href="/admin/users">👥 Kelola User</a>
+        <a href="/admin/bookings">📄 Kelola Pemesanan</a>
+        <a href="/admin/stats">📊 Statistik</a>
+        <a href="/logout">🚪 Logout</a>
+    </div>
+    <div class="admin-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

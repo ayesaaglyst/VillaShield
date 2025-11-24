@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="welcome-wrapper">
+  <h1 class="main-title">VillaShield</h1>
+  <img src="{{ url_for('static', filename='img/logo.png') }}" alt="VillaShield Logo" class="logo">
+  <p class="tagline">Liburan nyaman dan aman di vila impian Anda 💜</p>
+  <div class="menu-buttons">
+    <a href="{{ url_for('login') }}" class="btn">🔐 Login</a>
+    <a href="{{ url_for('register') }}" class="btn">📝 Daftar</a>
+  </div>
+</div>
+{% endblock %}

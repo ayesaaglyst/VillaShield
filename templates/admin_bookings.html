@@ -1,0 +1,69 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<h2>📄 Kelola Pemesanan</h2>
+
+<h3 style="margin-top: 30px;">➕ Tambah Pemesanan</h3>
+<a href="{{ url_for('form_pesanan_admin') }}" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; display: inline-block; margin-bottom: 30px;">
+    + Tambah Pemesanan
+</a>
+
+<!-- Form Filter -->
+<form method="GET" action="{{ url_for('admin_bookings') }}" class="filter-form" style="margin-bottom: 20px;">
+    <input type="text" name="kode_booking" placeholder="🔍 Kode Booking">
+    <input type="date" name="checkin">
+    <input type="date" name="checkout">
+    <select name="tipe_villa">
+        <option value="">-- Semua Tipe Villa --</option>
+        <option value="Royal Sunset Villa">Royal Sunset Villa</option>
+        <option value="Ocean Breeze Suite">Ocean Breeze Suite</option>
+        <option value="Garden View Cottage">Garden View Cottage</option>
+        <option value="Tropical Budget Room">Tropical Budget Room</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+<!-- Tabel Pemesanan -->
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama User</th>
+            <th>Nama Pemesan</th>
+            <th>Identitas</th>
+            <th>Tipe Villa</th>
+            <th>No Villa</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Total Harga</th>
+            <th>Status Checkout</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for d in bookings %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ d.nama_user }}</td>
+            <td>{{ d.nama }}</td>
+            <td>{{ d.identitas }}</td>
+            <td>{{ d.tipe_villa }}</td>
+            <td>{{ d.no_villa }}</td>
+            <td>{{ d.checkin }}</td>
+            <td>{{ d.checkout }}</td>
+            <td>{{ d.total_harga }}</td>
+            <td>{{ d.status_checkout }}</td>
+            <td>
+                {% if d.status_checkout != 'Sudah Checkout' %}
+                <form method="POST" action="{{ url_for('update_checkout_status', booking_id=d.id) }}">
+                    <button type="submit">✔ Tandai Checkout</button>
+                </form>
+                {% else %}
+                ✔
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

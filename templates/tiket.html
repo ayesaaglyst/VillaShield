@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="ticket-container">
+  <div class="tiket-card">
+    <div class="tiket-left">
+      <h2>🎫 VillaShield</h2>
+      <p><span>Kode Booking</span>: {{ kode_booking }}</p>
+      <p><span>Tipe Villa</span>: {{ tipe_villa }} - No. {{ no_villa }}</p>
+      <p><span>Check-in</span>: {{ checkin }}</p>
+      <p><span>Check-out</span>: {{ checkout }}</p>
+    </div>
+    <div class="tiket-right">
+      <div class="qr-placeholder">📎</div>
+      <a class="btn" href="{{ url_for('unduh_tiket_pdf', booking_id=booking_id) }}" target="_blank">
+        🖨️ Unduh PDF
+      </a>
+      <a class="btn" href="{{ url_for('riwayat') }}">
+        ⬅️ Kembali
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

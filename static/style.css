@@ -1,0 +1,336 @@
+/* === Dark Modern Palette === */
+:root {
+    --primary: #5f0f40;
+    --accent: #9a1750;
+    --background: #1e1e2f;
+    --card-bg: #2e2e3e;
+    --text: #f1f1f1;
+    --heading: #e0aaff;
+    --hover: #40214c;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+/* Reset box-sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background);
+    margin: 0;
+    padding: 40px 0 0;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 10px 30px var(--shadow);
+    text-align: center;
+}
+
+h1, h2 {
+    color: var(--heading);
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 12px 0 24px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    font-size: 16px;
+    background: #1c1c2b;
+    color: var(--text);
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+button, .btn {
+    padding: 14px 36px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--accent);
+    box-shadow: 0 6px 15px var(--accent);
+}
+
+.error {
+    color: #e63946;
+    font-weight: 600;
+    margin-top: -12px;
+    margin-bottom: 24px;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    font-size: 15px;
+    box-shadow: 0 6px 20px var(--shadow);
+    background: var(--card-bg);
+}
+
+thead tr {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 700;
+}
+
+thead th, tbody td {
+    padding: 14px 20px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tbody tr {
+    background-color: #2b2b3c;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #3c3c52;
+}
+
+td:nth-child(8), td:nth-child(9) {
+    font-weight: 600;
+    color: var(--heading);
+}
+
+.container p a, .dropdown-menu a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.container p a:hover, .dropdown-menu a:hover {
+    color: var(--heading);
+    text-decoration: underline;
+}
+
+/* Sidebar */
+body.admin-layout {
+    display: flex;
+    margin: 0;
+}
+
+.admin-sidebar {
+    width: 250px;
+    background-color: var(--background);
+    color: var(--text);
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.admin-sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-sidebar a {
+    display: block;
+    color: var(--text);
+    text-decoration: none;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.admin-sidebar a:hover {
+    background-color: var(--hover);
+}
+
+.admin-content {
+    flex: 1;
+    padding: 30px;
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+/* Home */
+.home-card {
+    background: var(--card-bg);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px var(--shadow);
+    max-width: 700px;
+    margin: auto;
+    color: var(--text);
+}
+
+.home-card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--heading);
+}
+
+.home-card p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: var(--text);
+}
+
+.menu-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.menu-buttons .btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.menu-buttons .btn:hover {
+    background-color: var(--accent);
+}
+
+/* === Booking Card (Riwayat Pemesanan) === */
+.booking-card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 15px var(--shadow);
+  color: var(--text);
+}
+
+.booking-card .info-grid p {
+  margin: 6px 0;
+}
+
+.booking-card .info-grid span {
+  font-weight: bold;
+  color: var(--heading);
+}
+
+.booking-card .btn {
+  margin-top: 16px;
+  background-color: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.booking-card .btn:hover {
+  background-color: var(--accent);
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 8px;
+}
+
+.info-grid p {
+  margin: 4px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.info-grid span {
+  font-weight: bold;
+  color: var(--heading);
+  min-width: 120px;
+}
+
+/* === Tiket Card (Detail Tiket) === */
+.tiket-card {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px var(--shadow);
+  max-width: 640px;
+  margin: 40px auto;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.tiket-left {
+  flex: 1;
+  padding: 24px;
+}
+
+.tiket-left h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: var(--heading);
+}
+
+.tiket-left p {
+  margin: 6px 0;
+}
+
+.tiket-left span {
+  font-weight: bold;
+  color: var(--heading);
+}
+
+.tiket-right {
+  background-color: var(--primary);
+  color: white;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tiket-right .btn {
+  margin-top: 10px;
+  background-color: white;
+  color: var(--primary);
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.tiket-right .btn:hover {
+  background-color: var(--accent);
+  color: white;
+}

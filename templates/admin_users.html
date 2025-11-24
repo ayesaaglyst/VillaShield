@@ -1,0 +1,33 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<h2>👥 Kelola User</h2>
+
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <form action="{{ url_for('hapus_user') }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus user ini?');">
+                    <input type="hidden" name="email" value="{{ user.email }}">
+                    <button type="submit" class="btn">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

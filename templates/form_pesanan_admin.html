@@ -1,0 +1,144 @@
+{% extends 'admin_base.html' %}
+
+{% block content %}
+<div class="content-area">
+    <h2>Pemesanan Villa</h2>
+    <form method="POST" action="{{ url_for('tambah_pesanan_admin') }}">
+        <div class="form-group">
+            <label for="nama">Nama Pemesan</label>
+            <input type="text" name="nama" id="nama" placeholder="Nama Lengkap" required>
+        </div>
+
+        <div class="form-group">
+            <label for="identitas">Nomor Identitas (KTP)</label>
+            <input type="text" name="identitas" id="identitas" placeholder="Contoh: 3201011234560001" required>
+        </div>
+
+        <div class="form-group">
+            <label for="kamar">Tipe Villa</label>
+            <select name="kamar" id="kamar" required>
+                <option value="">-- Pilih Tipe Villa --</option>
+                <option value="Royal Sunset Villa - 2500000">Royal Sunset Villa (Rp 2.500.000/malam)</option>
+                <option value="Ocean Breeze Suite - 1800000">Ocean Breeze Suite (Rp 1.800.000/malam)</option>
+                <option value="Garden View Cottage - 1200000">Garden View Cottage (Rp 1.200.000/malam)</option>
+                <option value="Tropical Budget Room - 750000">Tropical Budget Room (Rp 750.000/malam)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="no_villa">Nomor Villa</label>
+            <select name="no_villa" id="no_villa" required>
+                <option value="">Pilih nomor villa</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="checkin">Tanggal Check-in</label>
+            <input type="date" name="checkin" id="checkin" required>
+        </div>
+
+        <div class="form-group">
+            <label for="checkout">Tanggal Check-out</label>
+            <input type="date" name="checkout" id="checkout" required>
+        </div>
+
+        <!-- Total Bayar Display -->
+        <div class="form-group">
+            <label>Total Bayar</label>
+            <div id="harga_display" style="font-weight: bold;">Rp 0</div>
+        </div>
+
+        <div class="menu-buttons" style="margin-top: 24px;">
+            <button type="submit">➕ Tambah Pemesanan</button>
+            <a href="/admin/bookings" class="btn">📄 Semua Booking</a>
+            <a href="/logout" class="btn">🚪 Logout</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    async function fetchAvailableVillas() {
+        const tipeVilla = document.getElementById('kamar').value.split(" - ")[0];
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+        const noVillaSelect = document.getElementById('no_villa');
+
+        if (!tipeVilla || !checkin || !checkout) {
+            noVillaSelect.innerHTML = '<option value="">Pilih nomor villa</option>';
+            noVillaSelect.disabled = true;
+            return;
+        }
+
+        const response = await fetch('/get_available_villas', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tipe_villa: tipeVilla, checkin, checkout })
+        });
+
+        noVillaSelect.innerHTML = '';
+        if (response.ok) {
+            const data = await response.json();
+            if (data.available_villas.length > 0) {
+                data.available_villas.forEach(v => {
+                    const option = document.createElement('option');
+                    option.value = v;
+                    option.textContent = v;
+                    noVillaSelect.appendChild(option);
+                });
+                noVillaSelect.disabled = false;
+            } else {
+                noVillaSelect.innerHTML = '<option value="">Tidak ada villa tersedia</option>';
+                noVillaSelect.disabled = true;
+            }
+        } else {
+            noVillaSelect.innerHTML = '<option value="">Gagal mengambil data</option>';
+            noVillaSelect.disabled = true;
+        }
+    }
+
+    function hitungTotalHarga() {
+        const kamarValue = document.getElementById('kamar').value;
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+
+        if (!kamarValue || !checkin || !checkout) {
+            document.getElementById('harga_display').textContent = 'Rp 0';
+            return;
+        }
+
+        const hargaStr = kamarValue.split(" - ")[1];
+        const harga = parseInt(hargaStr);
+        const tglCheckin = new Date(checkin);
+        const tglCheckout = new Date(checkout);
+
+        const selisihHari = (tglCheckout - tglCheckin) / (1000 * 60 * 60 * 24);
+
+        if (selisihHari <= 0 || isNaN(harga)) {
+            document.getElementById('harga_display').textContent = 'Rp 0';
+            return;
+        }
+
+        const total = harga * selisihHari;
+        document.getElementById('harga_display').textContent = 'Rp ' + total.toLocaleString('id-ID');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('kamar').addEventListener('change', () => {
+            fetchAvailableVillas();
+            hitungTotalHarga();
+        });
+        document.getElementById('checkin').addEventListener('change', () => {
+            fetchAvailableVillas();
+            hitungTotalHarga();
+        });
+        document.getElementById('checkout').addEventListener('change', () => {
+            fetchAvailableVillas();
+            hitungTotalHarga();
+        });
+
+        const noVillaSelect = document.getElementById('no_villa');
+        noVillaSelect.disabled = true;
+        noVillaSelect.innerHTML = '<option value="">Pilih nomor villa</option>';
+    });
+</script>
+{% endblock %}

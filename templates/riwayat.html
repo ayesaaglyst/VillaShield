@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container riwayat-container">
+  <h2>Riwayat Pemesanan Anda</h2>
+
+  {% if bookings %}
+    <div class="card-wrapper">
+      {% for b in bookings %}
+      <div class="booking-card">
+        <div class="info-grid">
+          <p><span>Nama:</span> {{ b.nama }}</p>
+          <p><span>Identitas:</span> {{ b.identitas }}</p>
+          <p><span>Tipe Villa:</span> {{ b.tipe_villa }}</p>
+          <p><span>No. Villa:</span> {{ b.no_villa }}</p>
+          <p><span>Check-in:</span> {{ b.checkin }}</p>
+          <p><span>Check-out:</span> {{ b.checkout }}</p>
+          <p><span>Lama Inap:</span> {{ b.lama_inap }} malam</p>
+          <p><span>Total Harga:</span> Rp {{ "{:,}".format(b.total_harga).replace(',', '.') }}</p>
+        </div>
+        <a href="{{ url_for('tiket', booking_id=b.id) }}" class="btn">🎫 Tiket</a>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="no-data">Belum ada riwayat pemesanan.</p>
+  {% endif %}
+
+  <div class="bottom-nav" style="margin-top: 30px;">
+    <a href="{{ url_for('dashboard') }}" class="btn">⬅️ Kembali ke Beranda</a>
+  </div>
+</div>
+{% endblock %}

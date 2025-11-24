@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="home-card">
+  <h1>Selamat Datang, <span class="brand">{{ session.get('user_name', 'Pengguna') }}</span>!</h1>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="VillaShield Logo" class="home-logo" />
+  <p>Terima kasih telah menggunakan layanan <strong>VillaShield</strong>.</p>
+</div>
+{% endblock %}
