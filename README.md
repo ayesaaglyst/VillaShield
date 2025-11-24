@@ -3,6 +3,8 @@
 VillaShield adalah aplikasi pemesanan villa berbasis web menggunakan Python Flask dan MySQL. Aplikasi ini mendukung pemesanan villa oleh pengguna, pengelolaan pemesanan oleh admin, serta enkripsi data identitas menggunakan algoritma AES.
 
 ---
+Ayesa Aglystia n Ayat Akras
+
 
 ## Fitur Aplikasi
 
